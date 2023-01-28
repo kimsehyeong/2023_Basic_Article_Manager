@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		/**
 		 * nextLine = String 형 nextInt = int형
-		 * text is hard
+		 * text is hard...
 		 * 에러 : 실행햇는데 완전히 안되는거 예외 : 실행했는데 해보니깐 안됌 -> "필수"
 		 */
 
