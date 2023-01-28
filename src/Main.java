@@ -15,7 +15,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int lastArticleID = 0;
 		
-		List<Article> articles = new ArrayList<>();
+//		List<Article> articles = new ArrayList<>();
 
 		// while -> 무한 루프
 		while (true) {
