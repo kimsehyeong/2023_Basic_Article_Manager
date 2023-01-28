@@ -16,6 +16,7 @@ public class Main {
 		int lastArticleID = 0;
 		
 		List<Article> articles = new ArrayList<>();
+		
 
 		// while -> 무한 루프
 		while (true) {
