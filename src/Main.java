@@ -28,32 +28,6 @@ public class Main {
 			if (cmd.length() == 0) {
 				System.out.println("명령어를 입력해주세요");
 				continue;
-			}
-			
-			
-			if(cmd.startsWith("article detail ")) {
-				String[] detail = cmd.split(" ");
-				int num = Integer.parseInt(detail[2]) ;
-				boolean found = false;
-				
-				for (Article article : articles) {
-					/**
-					 * 반복문을 돌면서 인덱스값num 기준으로
-					 * 글번호id값 매칭 시킬때까지
-					 * for문을 돌려준다.
-					 * 돌려서 매칭되면 if문 실행
-					 */
-					if (article.id == num) {
-						found = true;
-						System.out.printf("%d번 글 존재\n",num);
-					}
-				}
-				if(found == false) {
-					System.out.printf("%d번 글 존재하지않아요\n",num);
-					continue;
-				}
-				
-				
 				
 			}else if (cmd.equals("article write")) {
 				int id = lastArticleID + 1;
@@ -84,7 +58,42 @@ public class Main {
 					System.out.println("게시물이 없습니다");
 					continue;
 				}
-			} 
+			} else if (cmd.startsWith("article detail ")) {
+				String[] detail = cmd.split(" ");
+				int num = Integer.parseInt(detail[2]) ;
+//				boolean found = false;
+				Article foundArticle = null;
+				
+				for (Article article : articles) {
+					/**
+					 * 반복문을 돌면서 인덱스값num 기준으로
+					 * 글번호id값 매칭 시킬때까지
+					 * for문을 돌려준다.
+					 * 돌려서 매칭되면 if문 실행
+					 */
+					if (article.id == num) {
+						foundArticle =article;
+//						found = true;
+//						System.out.printf("번호	|	%d\n",article.id);
+//						System.out.printf("날짜	|	%s\n",article.title);
+//						System.out.printf("제목	|	%s\n",article.title);
+//						System.out.printf("내용	|	%s\n",article.content);
+						break;
+					}
+				}
+				
+				if(foundArticle == null) {
+					System.out.printf("%d번 글 존재하지않아요\n",num);
+					continue;
+				}else {
+					System.out.printf("번호	|	%d\n",foundArticle.id);
+					System.out.printf("날짜	|	%s\n",foundArticle.title);
+					System.out.printf("제목	|	%s\n",foundArticle.title);
+					System.out.printf("내용	|	%s\n",foundArticle.content);
+				}
+			}
+			
+			
 			
 			else {
 				System.out.println("존재하지 않는 명령어 입니다.");
