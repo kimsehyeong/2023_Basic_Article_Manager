@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,8 +31,31 @@ public class Main {
 			}
 			
 			
-
-			if (cmd.equals("article write")) {
+			if(cmd.startsWith("article detail ")) {
+				String[] detail = cmd.split(" ");
+				int num = Integer.parseInt(detail[2]) ;
+				boolean found = false;
+				
+				for (Article article : articles) {
+					/**
+					 * 반복문을 돌면서 인덱스값num 기준으로
+					 * 글번호id값 매칭 시킬때까지
+					 * for문을 돌려준다.
+					 * 돌려서 매칭되면 if문 실행
+					 */
+					if (article.id == num) {
+						found = true;
+						System.out.printf("%d번 글 존재\n",num);
+					}
+				}
+				if(found == false) {
+					System.out.printf("%d번 글 존재하지않아요\n",num);
+					continue;
+				}
+				
+				
+				
+			}else if (cmd.equals("article write")) {
 				int id = lastArticleID + 1;
 				lastArticleID = id;
 
@@ -52,12 +76,10 @@ public class Main {
 				 * 배열 , list를 역순 조회 할때는
 				 * 초기값에 size() -1해주고 종료조건을 0이 될때까지 i--해준다
 				 */
-				
 				for(int i = articles.size() - 1; i>=0; i--) {
 					Article article = articles.get(i);
 					System.out.printf("%d	|	%s\n",article.id,article.title);
 				}
-				
 				if(articles.size() == 0){
 					System.out.println("게시물이 없습니다");
 					continue;
