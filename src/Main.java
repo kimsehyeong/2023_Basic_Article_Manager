@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -91,9 +90,25 @@ public class Main {
 					System.out.printf("제목	|	%s\n",foundArticle.title);
 					System.out.printf("내용	|	%s\n",foundArticle.content);
 				}
+			}else if (cmd.startsWith("article delete ")) {
+				String[] detail = cmd.split(" ");
+				int num = Integer.parseInt(detail[2]) ;
+//				boolean found = false;
+				Article foundArticle = null;
+				
+				for (Article article : articles) {
+					if (article.id == num) {
+						foundArticle =article;
+						break;
+					}
+				}
+				if(foundArticle == null) {
+					System.out.printf("%d번 글 존재하지않아요\n",num);
+					continue;
+				}
+				articles.remove(num - 1);
+				System.out.printf("%d번 글이 삭제 되었습니다\n",num);
 			}
-			
-			
 			
 			else {
 				System.out.println("존재하지 않는 명령어 입니다.");
