@@ -1,4 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,27 +33,31 @@ public class Main {
 			}else if (cmd.equals("article write")) {
 				int id = lastArticleID + 1;
 				lastArticleID = id;
-
+				SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date now = new Date();
+				String date = time.format(now);
+				
 				System.out.printf("제목 :");
 				String title = sc.nextLine();
 				System.out.printf("내용 :");
 				String content = sc.nextLine();
 //				lastArticleID++;
-
-				Article article = new Article(id, title, content);
+				
+				
+				Article article = new Article(id, title, content,date);
 				articles.add(article);
 				System.out.printf("%d글이 생성되었습니다\n", id);
 
 //				System.out.printf("%s, %s\n",title,content);
 			}else if (cmd.equals("article list")) {
-				System.out.println("번호	|	제목");
+				System.out.println("번호	|	제목	|	날짜");
 				/**
 				 * 배열 , list를 역순 조회 할때는
 				 * 초기값에 size() -1해주고 종료조건을 0이 될때까지 i--해준다
 				 */
 				for(int i = articles.size() - 1; i>=0; i--) {
 					Article article = articles.get(i);
-					System.out.printf("%d	|	%s\n",article.id,article.title);
+					System.out.printf("%d	|	%s	|	%s\n",article.id,article.title,article.date);
 				}
 				if(articles.size() == 0){
 					System.out.println("게시물이 없습니다");
@@ -87,7 +93,7 @@ public class Main {
 				}
 				System.out.printf("번호	|	%d\n",foundArticle.id);
 				System.out.printf("날짜	|	%s\n",foundArticle.title);
-				System.out.printf("제목	|	%s\n",foundArticle.title);
+				System.out.printf("제목	|	%s\n",foundArticle.date);
 				System.out.printf("내용	|	%s\n",foundArticle.content);
 					
 			}else if (cmd.startsWith("article delete ")) {
@@ -137,14 +143,16 @@ class Article {
 	int id;
 	String title;
 	String content;
+	String date;
 
 	public Article() {
 	}
 
-	public Article(int id, String title, String content) {
+	public Article(int id, String title, String content,String date) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
+		this.date = date;
 	}
 
 }
